@@ -10,7 +10,7 @@ const SchemaValidator = require('../middlewares/schemaValidators');
 const validateRequest = SchemaValidator(true);
 */
 
-router.post('/', async (req, res) => {
+router.post('/',/*validateRequest,*/ async (req, res) => {
     const { name } = req.body;
     const newPlayer = new Player(1000, name);
 
