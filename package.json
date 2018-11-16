@@ -1,0 +1,23 @@
+{
+  "name": "minasiderboiler",
+  "version": "0.0.1",
+  "description": "Boilerplate for the mina sider project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Morgan Ottosson",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^5.9.0",
+    "nodemon": "^1.18.6"
+  },
+  "dependencies": {
+    "async": "^2.6.1",
+    "await": "^0.2.6",
+    "express": "^4.16.4",
+    "joi": "^14.0.6",
+    "redis": "^2.8.0",
+    "swagger-ui-express": "^4.0.1"
+  }
+}
