@@ -4,6 +4,8 @@ const fs = require('fs');
 const app = express();
 const port = 3000;
 
+///!!!!!!!!!!!!!!!!!*********** Dont have this in prod
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 
 const bodyParser = require('body-parser');
@@ -21,7 +23,6 @@ https.createServer({
     cert: fs.readFileSync('server.cert'),
     requestCert: true,
     rejectUnauthorized: false
-}, app).listen(3000, () => console.log(`Example app listening on port ${port}!`))
-//app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+}, app).listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
