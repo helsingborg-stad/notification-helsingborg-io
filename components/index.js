@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-router.use('/save', require('./save/saveApi'));
+router.use('/getPerson', require('./person/personApi'));
 
 module.exports = router;

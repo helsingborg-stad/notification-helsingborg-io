@@ -1,22 +1,28 @@
 const router = require('express').Router();
-const save = require('./save');
+const dalPerson = require('./dalPerson');
 const async = require('async');
 const await = require('await');
-const Player = require('./playerModel');
+const Player = require('./personModel');
+soapRequest = require('easy-soap-request');
+
 
 /*
 not yet implemented in boiler
 const SchemaValidator = require('../middlewares/schemaValidators');
 const validateRequest = SchemaValidator(true);
 */
-
-router.post('/',/*validateRequest,*/ async (req, res) => {
+//changed to get temp, it was post
+router.get('/',/*validateRequest,*/ async (req, res) => {
+    console.log("save method")
+    /*
     const { name } = req.body;
     const newPlayer = new Player(1000, name);
-
+    */
     try {
-        return res.json(await save.savePlayer(newPlayer));
+        //removed input for the savePlayer method below
+        return res.json(await dalPerson.getPerson());
     } catch (err) {
+        console.log(err)
         res.json(err);
     }
 });
