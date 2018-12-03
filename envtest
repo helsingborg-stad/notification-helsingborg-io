@@ -1,0 +1,8 @@
+// added this since git will complain if you upload a .env file,
+// rename this to .env to make use of these variables.
+
+SERVERCERT="../localConfig/server.cert"
+SERVERKEY="../localConfig/server.key"
+PORT="3100"
+
+navetUrl="https://localhost:3200/getNavet/"
