@@ -28,10 +28,10 @@ exports.getPerson = async (body) => {
         let reply = await hget(id);
         /*
         Example of an axios call with https and certificates
-        and validating the response
+        and validating the response to what we expect to get
         const res = await axiosClient.post(process.env.navetUrl, { id });
         res.data.id = res.data.Folkbokforingspost.Personpost.PersonId.PersonNr;
-        const validResNavet = await validate(res.data, navetData);
+        const validRes = await validate(res.data, navetData);
         */
         return reply;
     } catch (error) {
@@ -50,7 +50,7 @@ const validate = (input, schema) => {
     });
 };
 
-// getting the object with key id
+// redis getting the object with key id
 const hget = (id) => {
     return new Promise((resolve, reject) => {
         client.hget('persons', id, (err, reply) => {
@@ -65,6 +65,7 @@ const hget = (id) => {
 
 // saving in redis
 const hset = (id, stringData) => {
+    // when saving the save object must be a string so do a stringify()
     return new Promise((resolve, reject) => {
         client.hmset('persons', id, stringData, (err, reply) => {
             if (err) {
