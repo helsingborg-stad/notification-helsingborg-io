@@ -3,8 +3,10 @@ const axios = require('axios');
 const https = require('https');
 const client = redis.createClient();
 const fs = require('fs');
-const navetData = require('./objectSchemas/navetData');
+// const navetData = require('./objectSchemas/navetData');
 
+// this will spamm errors in your terminal if there is no redis database
+// to connect to
 client.on('error', (err) => {
     console.log('Error ' + err);
 });
