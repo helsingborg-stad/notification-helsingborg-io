@@ -1,24 +1,35 @@
 const router = require('express').Router();
 const dal = require('./dal');
-const schema = require('./schema');
-const ExpressJoi = require('express-joi-validator');
 
-// route that runs a Joi validation middleware which rejects the call
-// if the req.body doesn't contain whats defined in the schema
-// this route will be /getPerson as defined in the index.js file
-router.post('/', ExpressJoi(schema), async (req, res) => {
+// Import the schemavalidator middleware.
+const SchemaValidator = require('../middlewares/schemaValidators');
+
+// Register middleware that will authenticate input against the specified schema for each endpoint.
+const validateRequest = SchemaValidator(true);
+
+// Here we register what endpoints we want.
+
+router.post('/', validateRequest, async (req, res) => {
     try {
-        return res.json(await dal.getPerson(req.body));
+        // Get the parameters from the request
+        const { id } = req.body;
+
+        // Convert response to json before sending it.
+        return res.json(
+            // Fetch data from another layer.
+            await dal.getPerson(id)
+        );
     } catch (err) {
+        // Send back error in json.
         res.json(err);
     }
 });
-// just test route
-// this route will be /getPerson/test
-router.post('/test', (req, res) => {
+
+router.post('/test', validateRequest, (req, res) => {
     try {
-        console.log('this is test');
-        return res.json('hello');
+        return res.json(
+            'hello'
+        );
     } catch (err) {
         res.json(err);
     }
