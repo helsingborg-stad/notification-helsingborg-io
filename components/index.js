@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-// route /getPerson pointing towards person/api
-router.use('/getPerson', require('./person/api'));
+// Register route to api-layer.
+router.use('/person', require('./person/api'));
 
 module.exports = router;
