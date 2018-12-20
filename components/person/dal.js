@@ -1,38 +1,41 @@
-const redis = require('redis');
 const axios = require('axios');
-const https = require('https');
-const fs = require('fs');
-// const navetData = require('./objectSchemas/navetData');
+const responseSchema = require('../validation/responseSchema');
 
-exports.getPerson = async (id) => {
+exports.fetchTestData = async (id) => {
     try {
-        // let reply = await hget(id);
+        // Fetch data from test api.
+        const testApi = 'https://jsonplaceholder.typicode.com/posts';
+        const response = await client.post(testApi);
 
-        const reply = {
-            id: id
-        };
+        // Validate response against schema
+        const validatedResponse = await validate(response.data, responseSchema);
 
-        /*
-        Example of an axios call with https and certificates
-        and validating the response to what we expect to get
-        const res = await axiosClient.post(process.env.navetUrl, { id });
-        res.data.id = res.data.Folkbokforingspost.Personpost.PersonId.PersonNr;
-        const validRes = await validate(res.data, navetData);
-        */
-
-        return reply;
+        return validatedResponse;
     } catch (error) {
+        console.log('error', error);
         return error;
     }
 };
 
-// validating with Joi
+// Validating response with Joi
 const validate = (input, schema) => {
     return new Promise((resolve, reject) => {
         try {
-            resolve(schema.validate(input));
+            const result = schema.validate(input);
+            if (result.error === null) {
+                resolve(result);
+            } else {
+                reject(result.error);
+            }
         } catch (error) {
             reject(error);
         }
     });
 };
+
+const client = axios.create({
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    timeout: 5000
+});

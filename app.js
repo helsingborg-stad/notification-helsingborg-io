@@ -5,12 +5,16 @@ const https = require('https');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger/swagger.json');
 const fs = require('fs');
+const bodyParser = require('body-parser');
 
 const app = express();
 
 // !!!!!!!!!!!!!!!!!*********** Dont have this in prod
 // if not set to 0 it will reject connections with self signed certificates
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => res.send('Hello World!'));
 
