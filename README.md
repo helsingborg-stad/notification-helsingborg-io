@@ -6,13 +6,15 @@ everything from how the app is set up to routing and validation.
 
 ## Development
 
-1. Clone repository.
-2. Install dependencies with npm install.
-3. Add certificate files (.cert / .key) to assets/certificates.
-4. Create .env-file in the root folder with these properties:
-⋅⋅⋅PORT=3000 (or any other port you prefer)⋅⋅
-⋅⋅⋅SERVER_KEY='./assets/certificates/server.key'..
-⋅⋅⋅SERVER_CERT='./assets/certificates/server.cert'
+1. Clone repository
+2. Install dependencies with npm install
+3. Add certificate files (.cert / .key) to assets/certificates
+4. Create .env-file in the root folder with these properties
+
+   PORT=3000 (or any other port you prefer)  
+   SERVER_KEY='./assets/certificates/server.key'  
+   SERVER_CERT='./assets/certificates/server.cert'
+
 5. Run project with npm start.
 
 ### Tests
@@ -26,6 +28,4 @@ Running tests:
 All files following the *.test.js-syntax will be included.
 
 ## Deployment
-------
-
 TODO
