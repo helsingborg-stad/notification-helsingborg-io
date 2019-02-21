@@ -17,6 +17,10 @@ everything from how the app is set up to routing and validation.
 
 5. Run project with npm start.
 
+## Documentation
+
+Documentation for apis built from this boilerplate should be split into two sections. Project related information should be written in the README-file for the repository, and specific instructions for calling the api should be documented with Swagger which is included in the project by default.
+
 ### Tests
 
 The project uses mocha + chai for testing.
