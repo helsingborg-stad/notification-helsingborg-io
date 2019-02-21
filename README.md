@@ -8,14 +8,15 @@ everything from how the app is set up to routing and validation.
 
 1. Clone repository
 2. Install dependencies with npm install
-3. Add certificate files (.cert / .key) to assets/certificates
-4. Create .env-file in the root folder with these properties
+3. Create .env-file in the root folder with these properties
 
    PORT=3000 (or any other port you prefer)  
    SERVER_KEY='./assets/certificates/server.key'  
    SERVER_CERT='./assets/certificates/server.cert'
 
-5. Run project with npm start.
+4. Run project with npm start.
+
+Certificate files for development purposes are included in this project to speed up the initial setup, but should be gitignored in the new forked project before deployment.
 
 ## Documentation
 
