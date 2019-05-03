@@ -1,6 +1,6 @@
 /* middlewares/SchemaValidator.js */
 const _ = require('lodash');
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 const Schemas = require('../validation/personSchemas');
 
 module.exports = (useJoiError = false) => {

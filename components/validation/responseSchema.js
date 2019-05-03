@@ -1,4 +1,4 @@
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 const globalSchema = require('./globalSchema');
 
 // Build your endpoint-specific schema here.
