@@ -3,9 +3,9 @@ const globalSchema = require('./globalSchema');
 
 // Build your endpoint-specific schema here.
 const body = Joi.object().keys({
-    id: globalSchema.id
+  id: globalSchema.id,
 });
 
 module.exports = {
-    body
+  body,
 };

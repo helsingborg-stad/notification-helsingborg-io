@@ -1,5 +1,8 @@
 // Gather all your schemas and export them here.
+const indexSchema = require('./indexSchema');
+const testSchema = require('./testSchema');
+
 module.exports = {
-    '/': require('./indexSchema'),
-    '/test': require('./testSchema')
+  '/': indexSchema,
+  '/test': testSchema,
 };
