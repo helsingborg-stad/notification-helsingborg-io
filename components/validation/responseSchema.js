@@ -1,7 +1,6 @@
-const Joi = require('joi');
-const globalSchema = require('./globalSchema');
+const Joi = require('@hapi/joi');
 
 // Build your endpoint-specific schema here.
 module.exports = Joi.object().keys({
-    id: Joi.number().required()
+  id: Joi.number().required(),
 });
