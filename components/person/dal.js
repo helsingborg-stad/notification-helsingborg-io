@@ -1,5 +1,5 @@
 const axios = require('axios');
-const responseSchema = require('../validation/responseSchema');
+const responseSchema = require('./response.schema');
 
 // Validating response with Joi
 const validate = (input, schema) => new Promise((resolve, reject) => {
@@ -30,10 +30,9 @@ exports.fetchTestData = async () => {
 
     // Validate response against schema
     const validatedResponse = await validate(response.data, responseSchema);
-
     return validatedResponse;
   } catch (error) {
-    console.log('error', error);
+    console.log('error', error); // eslint-disable-line no-console
     return error;
   }
 };

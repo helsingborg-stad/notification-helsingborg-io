@@ -1,11 +1,12 @@
 const router = require('express').Router();
 const dal = require('./dal');
+const schema = require('./schema');
 
 // Import the schemavalidator middleware.
 const SchemaValidator = require('../middlewares/schemaValidator');
 
 // Register middleware that will authenticate input against the specified schema for each endpoint.
-const validateRequest = SchemaValidator(true);
+const validateRequest = SchemaValidator(schema, true);
 
 // Here we register what endpoints we want.
 
