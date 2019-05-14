@@ -1,7 +1,7 @@
 # labs-node-js-boilerplate
-Boilerplate repository for nodejs based LABS projects. 
+Boilerplate repository for nodejs based LABS projects.
 
-This boilerplats is built on nodejs and express. It includes an example that showcases 
+This boilerplats is built on nodejs and express. It includes an example that showcases
 everything from how the app is set up to routing and validation.
 
 ## Development
@@ -10,9 +10,9 @@ everything from how the app is set up to routing and validation.
 2. Install dependencies with npm install
 3. Create .env-file in the root folder with these properties
 
-   PORT=3000 (or any other port you prefer)  
-   SERVER_KEY='./assets/certificates/server.key'  
-   SERVER_CERT='./assets/certificates/server.cert'
+   PORT=3000 #(or any other port you prefer)
+   SERVER_KEY=./assets/certificates/server.key
+   SERVER_CERT=./assets/certificates/server.cert
 
 4. Run project with npm start.
 
@@ -34,3 +34,19 @@ All files following the *.test.js-syntax will be included.
 
 ## Deployment
 TODO
+
+## Docker
+
+This app can be built using [docker](https://www.docker.com/). To do so, simply navigate to the root of the project and run:
+
+```
+docker build . -t [tag] && \
+docker run -d \
+-p [host-port]:[server-port] \
+-e PORT=[server-port] \
+-e SERVER_KEY=./assets/certificates/server.key \
+-e SERVER_CERT=./assets/certificates/server.cert \
+[tag]
+```
+
+Further, you can thus use [docker-compose](https://docs.docker.com/compose/) to orchestrate containers created from this repository (and other dockerized apps). When developing, we use [this](https://github.com/helsingborg-stad/labs-docker-compose) specific docker-compose file.
