@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-expressions */
-process.env.NODE_ENV = 'test';
 require('dotenv').config({ path: './.env.test' });
 
 const chai = require('chai');
@@ -26,7 +24,7 @@ describe('Server', () => {
       .end((err, res) => {
         should.not.exist(err);
         res.should.have.status(200);
-        res.should.be.json;
+        res.should.be.json();
         should.exist(res.body);
         done();
       });
