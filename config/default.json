@@ -1,0 +1,7 @@
+{
+  "SERVER": {
+    "PORT": "env_placeholder",
+    "KEY": "env_placeholder",
+    "CERT": "env_placeholder"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "SERVER": {
+    "PORT": "PORT",
+    "KEY": "SERVER_KEY",
+    "CERT": "SERVER_CERT"
+  }
+}
