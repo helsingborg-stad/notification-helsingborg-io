@@ -1,19 +1,6 @@
 const axios = require('axios');
 const responseSchema = require('./response.schema');
-
-// Validating response with Joi
-const validate = (input, schema) => new Promise((resolve, reject) => {
-  try {
-    const result = schema.validate(input);
-    if (result.error === null) {
-      resolve(result);
-    } else {
-      reject(result.error);
-    }
-  } catch (error) {
-    reject(error);
-  }
-});
+const { validate } = require('../validation/validation');
 
 const client = axios.create({
   headers: {

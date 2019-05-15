@@ -1,12 +1,12 @@
-const router = require('express').Router();
+const express = require('express');
 const dal = require('./dal');
 const schema = require('./schema');
+const Validator = require('../middlewares/validator.middleware');
 
-// Import the schemavalidator middleware.
-const SchemaValidator = require('../middlewares/schemaValidator');
+const router = express.Router();
 
-// Register middleware that will authenticate input against the specified schema for each endpoint.
-const validateRequest = SchemaValidator(schema, true);
+// Register middleware that will authenticate input against the specified schema
+const validateRequest = Validator(schema, true);
 
 // Here we register what endpoints we want.
 
@@ -19,22 +19,18 @@ router.post('/fetchTestData', validateRequest, async (req, res) => {
     const response = await dal.fetchTestData(id);
 
     // Convert response to json before sending it.
-    return res.json(
-      response,
-    );
+    return res.json(response);
   } catch (err) {
     // Send back error in json.
-    return res.json(err);
+    return res.status(err.status || 500).json(err);
   }
 });
 
 router.post('/test', validateRequest, (req, res) => {
   try {
-    return res.json(
-      'hello',
-    );
+    return res.json('hello');
   } catch (err) {
-    return res.json(err);
+    return res.status(err.status || 500).json(err);
   }
 });
 
