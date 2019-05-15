@@ -1,19 +1,6 @@
 const axios = require('axios');
 const responseSchema = require('./response.schema');
-
-// Validating response with Joi
-const validate = (input, schema) => new Promise((resolve, reject) => {
-  try {
-    const result = schema.validate(input);
-    if (result.error === null) {
-      resolve(result);
-    } else {
-      reject(result.error);
-    }
-  } catch (error) {
-    reject(error);
-  }
-});
+const { validate } = require('../../validation/validation');
 
 const client = axios.create({
   headers: {
@@ -22,7 +9,7 @@ const client = axios.create({
   timeout: 5000,
 });
 
-exports.fetchTestData = async () => {
+const fetchTestData = async () => {
   try {
     // Fetch data from test api.
     const testApi = 'https://jsonplaceholder.typicode.com/posts';
@@ -35,4 +22,8 @@ exports.fetchTestData = async () => {
     console.log('error', error); // eslint-disable-line no-console
     return error;
   }
+};
+
+module.exports = {
+  fetchTestData,
 };
