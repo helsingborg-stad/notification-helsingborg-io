@@ -1,6 +1,6 @@
 const axios = require('axios');
 const responseSchema = require('./response.schema');
-const { validate } = require('../validation/validation');
+const { validate } = require('../../validation/validation');
 
 const client = axios.create({
   headers: {
@@ -9,7 +9,7 @@ const client = axios.create({
   timeout: 5000,
 });
 
-exports.fetchTestData = async () => {
+const fetchTestData = async () => {
   try {
     // Fetch data from test api.
     const testApi = 'https://jsonplaceholder.typicode.com/posts';
@@ -22,4 +22,8 @@ exports.fetchTestData = async () => {
     console.log('error', error); // eslint-disable-line no-console
     return error;
   }
+};
+
+module.exports = {
+  fetchTestData,
 };

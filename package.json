@@ -4,10 +4,10 @@
   "description": "Boilerplate repository for nodejs based LABS projects.",
   "main": "app.js",
   "scripts": {
-    "start": "NODE_ENV=production node -r dotenv/config app.js",
-    "dev": "nodemon -r dotenv/config app.js",
-    "test": "NODE_ENV=test ./node_modules/.bin/mocha components/**/*.test.js",
-    "test:watch": "./node_modules/.bin/mocha components/**/*.test.js --watch"
+    "start": "NODE_ENV=production node -r dotenv/config src/app.js",
+    "dev": "nodemon -r dotenv/config src/app.js",
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha src/components/**/*.test.js",
+    "test:watch": "./node_modules/.bin/mocha src/components/**/*.test.js --watch"
   },
   "author": "Helsingborg Stad",
   "license": "MIT",
