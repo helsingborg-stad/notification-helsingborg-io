@@ -13,7 +13,7 @@ everything from how the app is set up to routing and validation.
    PORT=3000 #(or any other port you prefer)
    LOG_LEVEL=info #(trace, debug, info, warn, error, fatal, silent)
 
-4. Run project with npm start.
+4. Run project with ```npm run dev```
 
 Certificate files for development purposes are included in this project to speed up the initial setup, but should be gitignored in the new forked project before deployment.
 
