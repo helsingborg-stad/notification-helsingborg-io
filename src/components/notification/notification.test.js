@@ -7,16 +7,16 @@ const server = require('../../app');
 const should = chai.should();
 chai.use(chaiHttp);
 
-describe('Person', () => {
+describe('Notification', () => {
   after((done) => {
     server.close();
     done();
   });
 
-  it('should return simple json on /test POST', (done) => {
+  it('should return json on /notification GET', (done) => {
     chai.request(server)
-      .post('/person/test')
-      .send({ id: '199812240101' })
+      .get('/notification')
+      .send()
       .end((err, res) => {
         should.not.exist(err);
         res.should.have.status(200);
