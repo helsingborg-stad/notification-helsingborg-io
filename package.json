@@ -1,7 +1,7 @@
 {
-  "name": "labsnodejsboiler",
+  "name": "labs-api-notification",
   "version": "0.0.1",
-  "description": "Boilerplate repository for nodejs based LABS projects.",
+  "description": "Notification api that allows services to push notifications to users",
   "main": "app.js",
   "scripts": {
     "start": "NODE_ENV=production node -r dotenv/config src/app.js",
