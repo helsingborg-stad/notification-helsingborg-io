@@ -8,8 +8,9 @@ const routes = require('./components/routes');
 const logger = require('./utils/logger');
 
 const app = express();
+
 /**
- * Init Config
+ * Config
  */
 const SERVER_PORT = config.get('SERVER.PORT');
 
@@ -25,6 +26,10 @@ app.use(routes());
 
 // Swagger for documenting the api, access through localhost:xxxx/api-docs.
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+/**
+ * Start
+ */
 
 // Listen on port specfied in env-file.
 const server = app.listen(SERVER_PORT,

@@ -1,6 +1,7 @@
 const axios = require('axios');
 const responseSchema = require('./response.schema');
 const { validate } = require('../../validation/validation');
+const logger = require('../../utils/logger');
 
 const client = axios.create({
   headers: {
@@ -19,8 +20,8 @@ const fetchTestData = async () => {
     const validatedResponse = await validate(response.data, responseSchema);
     return validatedResponse;
   } catch (error) {
-    console.log('error', error); // eslint-disable-line no-console
-    return error;
+    logger.error(error);
+    throw error;
   }
 };
 
