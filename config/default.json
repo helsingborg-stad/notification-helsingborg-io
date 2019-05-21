@@ -1,4 +1,7 @@
 {
+  "LOG": {
+    "LEVEL": "trace"
+  },
   "SERVER": {
     "PORT": "env_placeholder"
   }

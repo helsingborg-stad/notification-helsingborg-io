@@ -1,4 +1,7 @@
 {
+  "LOG": {
+    "LEVEL": "LOG_LEVEL"
+  },
   "SERVER": {
     "PORT": "PORT"
   }
