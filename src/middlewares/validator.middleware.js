@@ -1,5 +1,6 @@
 const { validate } = require('../validation/validation');
 const { WeakValidationError } = require('../utils/error');
+const logger = require('../utils/logger');
 
 // enabled HTTP methods for request data validation
 const supportedMethods = ['post', 'put'];
@@ -26,6 +27,8 @@ const middleware = (schema, detailedError = false) => (req, res, next) => {
   validate(req.body, schema, validationOptions)
     .then(() => next())
     .catch((e) => {
+      logger.error(e);
+
       const err = detailedError
         ? e
         : new WeakValidationError('Invalid request data. Please review request and try again.');

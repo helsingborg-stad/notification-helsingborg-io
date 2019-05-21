@@ -9,10 +9,10 @@ const routes = () => {
   const validateRequest = Validator(schema, true);
 
   // Here we register what endpoints we want.
-  router.post('/fetchTestData', validateRequest, async (req, res) => {
+  router.get('/test/:id', async (req, res) => {
     try {
       // Get the parameters from the request
-      const { id } = req.body;
+      const { id } = req.params;
 
       // Fetch data from another layer.
       const response = await dal.fetchTestData(id);
