@@ -10,8 +10,8 @@ everything from how the app is set up to routing and validation.
 2. Install dependencies with npm install
 3. Create .env-file in the root folder with these properties
 
-   PORT=3000 #(or any other port you prefer)
-   LOG_LEVEL=info #(trace, debug, info, warn, error, fatal, silent)
+   PORT=3000 #(or any other port you prefer)    
+   LOG_LEVEL=info #(trace, debug, info, warn, error, fatal, silent)    
 
 4. Run project with ```npm run dev```
 
