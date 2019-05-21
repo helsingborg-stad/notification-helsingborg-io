@@ -23,11 +23,14 @@ Documentation for apis built from this boilerplate should be split into two sect
 
 ### Tests
 
-The project uses mocha + chai for testing.
+The project uses [mocha](https://mochajs.org/) + [chai](https://www.chaijs.com/) for testing.
 
 Running tests:
+
 1. Create .env.test-file in the root folder with same settings as the regular .env but with a different port.
-2. Run the command npm run test:watch
+2. Run the command ```npm run test```    
+
+To run the tests on code-changes, use ```npm run test:watch```
 
 All files following the *.test.js-syntax will be included.
 
