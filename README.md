@@ -2,6 +2,7 @@
 API for storing and exposing notifications; pushed by services, for users.
 
 ## Development
+Prerequisite: local MySQL server running
 
 1. Clone repository
 2. Install dependencies with npm install
@@ -10,7 +11,8 @@ API for storing and exposing notifications; pushed by services, for users.
    PORT=3000 #(or any other port you prefer)
    LOG_LEVEL=info #(trace, debug, info, warn, error, fatal, silent)
 ````
-4. Run project with ```npm run dev```
+4. run ```npm run migrate:latest``` (this will migrate your mysql schemas to the latest version)
+5. Run project with ```npm run dev```
 
 ## Documentation
 
@@ -32,6 +34,17 @@ All files following the *.test.js-syntax will be included.
 ## Deployment
 
 TODO
+
+## MySQL
+
+The server uses MySQL as the database for storing data. The version we use is ```5.7```.
+
+#### Migration
+
+We use Knex to migrate the database.For ease, we have set up two scripts in the npm package.json:
+
+```npm run migrate:latest``` - migrate to the latest version
+```npm run migrate:rollback``` - rolls back the db to teh previous version (as in migration steps)
 
 ## Docker
 

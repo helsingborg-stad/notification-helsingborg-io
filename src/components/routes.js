@@ -1,15 +1,14 @@
 const express = require('express');
 
-const person = require('./person/api');
+const notification = require('./notification/notification.api');
 
 const routes = () => {
   const router = express.Router();
 
   // Register route to api-layer.
-  router.use('/person', person());
+  router.use('/notification', notification());
 
   return router;
 };
-
 
 module.exports = routes;
