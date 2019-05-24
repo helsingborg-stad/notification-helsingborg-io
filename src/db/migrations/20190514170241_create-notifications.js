@@ -7,6 +7,9 @@ const up = async (db) => {
     t.string('pointer');
     t.dateTime('created_at').notNull().defaultsTo(db.fn.now());
     t.dateTime('acced_at');
+    t.dateTime('mail_sent_at');
+    t.dateTime('sms_sent_at');
+    t.dateTime('digi_mail_sent_at');
   });
 };
 
