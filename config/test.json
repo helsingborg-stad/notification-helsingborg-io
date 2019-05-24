@@ -1,1 +1,9 @@
-{}
+{
+  "MYSQL": {
+    "HOST": "127.0.0.1",
+    "DB": "hbgworks_db",
+    "CONNECTION_LIMIT": 10,
+    "USER": "hbgworks_user",
+    "PASSWORD": "hbgworks_pw"
+  }
+}

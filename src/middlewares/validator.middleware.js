@@ -25,7 +25,10 @@ const middleware = (schema, detailedError = false) => (req, res, next) => {
   }
 
   validate(req.body, schema, validationOptions)
-    .then(() => next())
+    .then((validated) => {
+      req.body = validated;
+      next();
+    })
     .catch((e) => {
       logger.error(e);
 

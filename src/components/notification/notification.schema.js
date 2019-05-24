@@ -17,10 +17,14 @@ const genericSchema = Joi.object().keys({
   did_mail_sent_at: date,
 });
 
-const requestSchema = Joi.object().keys({
+const postSchema = Joi.object().keys({
   service_id: id,
   user_id: id,
   message,
+  pointer,
+});
+
+const putSchema = Joi.object().keys({
   pointer,
   acced_at: date,
   mail_sent_at: date,
@@ -42,6 +46,7 @@ const responseSchema = Joi.object().keys({
 
 module.exports = {
   genericSchema,
-  requestSchema,
+  putSchema,
+  postSchema,
   responseSchema,
 };
