@@ -11,5 +11,11 @@
     "CONNECTION_LIMIT": "MYSQL_CONNECTION_LIMIT",
     "USER": "MYSQL_USER",
     "PASSWORD": "MYSQL_PASSWORD"
+  },
+  "WSDL": {
+    "URI": "WSDL_HOST",
+    "HOST": "WSDL_HOST",
+    "CERT": "WSDL_CERT",
+    "KEY": "WSDL_KEY"
   }
 }
