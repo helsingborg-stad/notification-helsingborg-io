@@ -16,12 +16,12 @@ describe('Notification', () => {
   });
 
   beforeEach(async () => {
-    await Notifications.fetchAll().map(res => res.destroy());
+    await Notifications.reset();
   });
 
   it('should return json on /notification GET', async () => chai
     .request(server)
-    .get('/notification')
+    .get('/notification?user_id=john_snow')
     .send()
     .then((res) => {
       res.should.have.status(200);
@@ -30,6 +30,16 @@ describe('Notification', () => {
       res.body.length.should.equal(0);
     }));
 
+  it('should return 422 on /notification GET without user_id', async () => chai
+    .request(server)
+    .get('/notification')
+    .send()
+    .then((res) => {
+      res.should.have.status(422);
+      res.should.be.json;
+      should.exist(res.body);
+      should.exist(res.error);
+    }));
 
   it('should allow POST with valid body', async () => chai
     .request(server)
@@ -57,7 +67,7 @@ describe('Notification', () => {
       });
 
     await requester
-      .get('/notification')
+      .get('/notification?user_id=john_snow')
       .send()
       .then((res) => {
         res.should.have.status(200);
@@ -150,7 +160,7 @@ describe('Notification', () => {
       });
 
     await requester
-      .get('/notification')
+      .get('/notification?user_id=john_snow')
       .send()
       .then((res) => {
         res.should.have.status(200);

@@ -3,14 +3,15 @@ const { message, id } = require('../../validation/global.schema');
 
 const pointer = Joi.string().min(0).max(50);
 const date = Joi.date();
+const limit = Joi.number().min(1).max(100).default(10);
 
 // Generic Schema.
 const genericSchema = Joi.object().keys({
-  service_id: id,
-  user_id: id,
-  message,
+  service_id: id.required(),
+  user_id: id.required(),
+  message: message.required(),
   pointer,
-  created_at: date,
+  created_at: date.required(),
   acced_at: date,
   mail_sent_at: date,
   sms_sent_at: date,
@@ -18,9 +19,9 @@ const genericSchema = Joi.object().keys({
 });
 
 const postSchema = Joi.object().keys({
-  service_id: id,
-  user_id: id,
-  message,
+  service_id: id.required(),
+  user_id: id.required(),
+  message: message.required(),
   pointer,
 });
 
@@ -32,12 +33,22 @@ const putSchema = Joi.object().keys({
   did_mail_sent_at: date,
 });
 
-const responseSchema = Joi.object().keys({
+const querySchema = Joi.object().keys({
+  user_id: id.required(),
   service_id: id,
-  user_id: id,
-  message,
+  limit,
+  acced_at: date,
+  mail_sent_at: date,
+  sms_sent_at: date,
+  did_mail_sent_at: date,
+});
+
+const responseSchema = Joi.object().keys({
+  service_id: id.required(),
+  user_id: id.required(),
+  message: message.required(),
   pointer,
-  created_at: date,
+  created_at: date.required(),
   acced_at: date,
   mail_sent_at: date,
   sms_sent_at: date,
@@ -46,6 +57,7 @@ const responseSchema = Joi.object().keys({
 
 module.exports = {
   genericSchema,
+  querySchema,
   putSchema,
   postSchema,
   responseSchema,
