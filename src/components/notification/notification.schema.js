@@ -1,9 +1,8 @@
 const Joi = require('@hapi/joi');
-const { message, id } = require('../../validation/global.schema');
+const { message, id, limit } = require('../../validation/global.schema');
 
 const pointer = Joi.string().min(0).max(50);
 const date = Joi.date();
-const limit = Joi.number().min(1).max(100).default(10);
 
 // Generic Schema.
 const genericSchema = Joi.object().keys({

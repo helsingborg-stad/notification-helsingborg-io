@@ -1,23 +1,22 @@
-const { model } = require('../../db/db.client');
+const { client, extractQueryParts } = require('../../db/db.client');
 
-const Notifications = model('notifications');
+const Notifications = () => client('notifications');
 
-const reset = () => Notifications.fetchAll().map(res => res.destroy());
+const reset = () => Notifications()
+  .truncate();
 
 const query = async (params = {}) => {
-  const where = params;
-  const limit = params.limit || 10;
+  const { where, limit } = extractQueryParts(params);
 
-  delete where.limit;
-
-  return Notifications
-    .query('orderBy', 'created_at', 'desc')
-    .query('limit', limit)
+  return Notifications()
+    .select()
     .where(where)
-    .fetchAll();
+    .orderBy('created_at', 'desc')
+    .limit(limit || 10);
 };
 
-const create = entity => (new Notifications(entity).save());
+const create = entity => Notifications()
+  .insert(entity);
 
 module.exports = {
   reset,
