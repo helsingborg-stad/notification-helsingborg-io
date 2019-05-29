@@ -17,7 +17,7 @@ const knex = Knex({
     password: MYSQL_PASSWORD,
     database: MYSQL_DB,
   },
-  pool: { min: 0, max: MYSQL_CONNECTION_LIMIT },
+  pool: { min: 0, max: Number(MYSQL_CONNECTION_LIMIT) },
 });
 
 const bookshelf = Bookshelf(knex);

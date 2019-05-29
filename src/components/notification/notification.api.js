@@ -1,15 +1,15 @@
 const express = require('express');
 const Notification = require('./notification.dal');
-const { requestSchema } = require('./notification.schema');
+const { querySchema, postSchema } = require('./notification.schema');
 const Validator = require('../..//middlewares/validator.middleware');
 
 const routes = () => {
   const router = express.Router();
-  const validateRequest = Validator(requestSchema, true);
 
-  router.get('/', async (req, res) => {
+  router.get('/', Validator(querySchema, 'query', true), async (req, res) => {
     try {
-      const result = await Notification.where(req.params || {}).fetchAll();
+      const { query } = req;
+      const result = await Notification.query(query);
 
       return res.json(result);
     } catch (err) {
@@ -17,10 +17,10 @@ const routes = () => {
     }
   });
 
-  router.post('/', validateRequest, async (req, res) => {
+  router.post('/', Validator(postSchema, 'body', true), async (req, res) => {
     try {
       const { body } = req;
-      const result = await (new Notification(body)).save();
+      const result = await Notification.create(body);
 
       return res.json(result);
     } catch (err) {
