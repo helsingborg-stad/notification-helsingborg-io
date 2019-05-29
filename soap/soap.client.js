@@ -1,7 +1,7 @@
 const fs = require('fs');
 const config = require('../node_modules/config');
 const logger = require('../src/utils/logger');
-const { WsdlCallError, WsdlConnectionError } = require('../src/utils/error');
+const { WsdlCallError, WsdlConnectionError, WsdlDataError } = require('../src/utils/error');
 const soap = require('../node_modules/soap');
 
 const WSDL_URI = config.get('WSDL.URI');
@@ -30,7 +30,7 @@ async function connect() {
 async function call(f, ...params) {
   try {
     const [res] = await f(...params);
-    if (res === null) throw new Error('NoDataFound');
+    if (res === null) throw new WsdlDataError('NoDataFound');
     return res.result;
   } catch (e) {
     throw new WsdlCallError('The call to Mina Meddelande returned an error', e);
