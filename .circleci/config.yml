@@ -8,7 +8,7 @@ jobs:
           version: 17.03.0-ce
       - run:
           name: Build Docker image from repository
-          command: docker build https://github.com/helsingborg-stad/$CIRCLE_PROJECT_REPONAME.git#container:feaure/deploy
+          command: docker build https://github.com/helsingborg-stad/$CIRCLE_PROJECT_REPONAME.git#container:feature/deploy
       - run:
           name: Push to DockerHub
           command: |
