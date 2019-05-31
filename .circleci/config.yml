@@ -3,7 +3,6 @@ jobs:
   build:
     docker:
       - image: circleci/python:2.7.14
-    working_directory: ~/
     steps:
       - setup_remote_docker:
           version: 17.03.0-ce
