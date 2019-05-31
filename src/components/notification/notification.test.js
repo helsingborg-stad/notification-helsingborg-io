@@ -4,7 +4,7 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../../app');
 const Notifications = require('./notification.dal');
-const { knex } = require('../../db/db.client');
+const { client } = require('../../db/db.client');
 
 const should = chai.should();
 chai.use(chaiHttp);
@@ -12,7 +12,8 @@ chai.use(chaiHttp);
 describe('Notification', () => {
   after(async () => {
     server.close();
-    await knex.destroy();
+    await Notifications.reset();
+    await client.destroy();
   });
 
   beforeEach(async () => {
