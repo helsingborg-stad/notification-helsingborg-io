@@ -6,7 +6,6 @@ jobs:
     working_directory: ~/
 
     steps:
-      - checkout
       - setup_remote_docker:
 
         - restore_cache:
