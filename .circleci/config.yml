@@ -6,14 +6,16 @@ jobs:
     working_directory: ~/
     steps:
       - setup_remote_docker:
-        - run:
-            name: Push to DockerHub
-            command: |
-              docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD
-              docker push helsingborgstad/labs-api-notification:$CIRCLE_SHA1
-        - run:
-            name: Deploy to Heroku
-            command: |
-              docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY registry.heroku.com
-              docker tag helsingborgstad/labs-api-notification:$CIRCLE_SHA1 registry.heroku.com/$HEROKU_APP_NAME/web
-              docker push registry.heroku.com/$HEROKU_APP_NAME/web
+        version: 17.03.0-ce
+        docker_layer_caching: true
+      - run:
+          name: Push to DockerHub
+          command: |
+            docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD
+            docker push helsingborgstad/labs-api-notification:$CIRCLE_SHA1
+      - run:
+          name: Deploy to Heroku
+          command: |
+            docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY registry.heroku.com
+            docker tag helsingborgstad/labs-api-notification:$CIRCLE_SHA1 registry.heroku.com/$HEROKU_APP_NAME/web
+            docker push registry.heroku.com/$HEROKU_APP_NAME/web
