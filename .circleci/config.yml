@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    machine: circleci/node:7.10
+    machine: "circleci/node:7.10"
 
     working_directory: ~/
 
