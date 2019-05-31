@@ -2,7 +2,7 @@
 FROM node:11.14.0-alpine
 
 # Create the folder for the app and set it as the workplace (commands will be ran from here)
-WORKDIR ./app
+WORKDIR /app
 
 # Copy package.json and package-lock.json to /app
 COPY package*.json ./
