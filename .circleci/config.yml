@@ -8,7 +8,7 @@ jobs:
           version: 17.03.0-ce
       - run:
           name: Build Docker image from repository
-          command: docker build -t helsingborg-stad/$IMAGE_NAME:$TAG .
+          command: docker build helsingborg-stad/$IMAGE_NAME:$TAG .
       - run:
           name: Push to DockerHub
           command: |
