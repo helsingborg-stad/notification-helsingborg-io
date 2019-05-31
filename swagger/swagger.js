@@ -1,42 +1,22 @@
+const { notificationPath, notificationsSchema } = require('../src/components/notification/notification.swagger');
+
 module.exports = {
   swagger: '2.0',
   info: {
     version: '0.0.1',
     title: 'Simple API',
-    description: 'A simple API to learn how to write OpenAPI Specification',
+    description: 'Api document to test and document all available API functionality',
   },
   host: 'simple.api',
-  basePath: '/openapi101',
   paths: {
-    '/find': {
-      get: {
-        summary: 'Gets some persons',
-        description: 'Returns a object containing person.',
-        parameters: [
-          {
-            name: 'id',
-            in: 'path',
-            description: 'ID of person',
-            required: true,
-            type: 'string',
-          },
-        ],
-        responses: {
-          200: {
-            description: 'A object of Person',
-            schema: {
-              type: 'object',
-              items: {
-                properties: {
-                  name: {
-                    type: 'string',
-                  },
-                },
-              },
-            },
-          },
-        },
-      },
+    '/notification': {
+      post: notificationPath.post,
     },
+    '/notification/find': {
+      get: notificationPath.get,
+    },
+  },
+  definitions: {
+    ...notificationsSchema,
   },
 };
