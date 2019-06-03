@@ -46,6 +46,7 @@ jobs:
           root: .
           paths:
             - ./image.tar
+  runapp:
     executor: heroku/default
     steps:
       - heroku/install
@@ -102,6 +103,12 @@ workflows:
   build-master:
     jobs:
       - build:
+          filters:
+            branches:
+              only: feature/deploy
+      - runapp:
+          requires:
+            - build
           filters:
             branches:
               only: feature/deploy
