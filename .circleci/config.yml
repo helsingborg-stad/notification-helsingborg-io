@@ -54,7 +54,7 @@ jobs:
       - run:
         name: Trigger application on heroku
         command: | 
-        heroku container:release web
+          heroku container:release web
 
   publish-latest:
     executor: docker-publisher
