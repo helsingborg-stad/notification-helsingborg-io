@@ -23,6 +23,8 @@
 # Sebastian Thulin (sebastian.thulin@helsingborg.se)
 #
 version: 2.1
+orbs:
+  heroku: circleci/heroku@1.0.0
 executors:
   docker-publisher:
     docker:
@@ -44,6 +46,9 @@ jobs:
           root: .
           paths:
             - ./image.tar
+    executor: heroku/default
+    steps:
+      - heroku/install
   publish-latest:
     executor: docker-publisher
     steps:
