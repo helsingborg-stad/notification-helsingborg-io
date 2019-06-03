@@ -10,7 +10,44 @@ const date = () => ({
   format: 'date',
 });
 
+// Definitions
+const ValidationError = {
+  type: 'object',
+  properties: {
+    status: {
+      type: 'integer',
+      format: 'int64',
+    },
+    name: {
+      type: 'string',
+    },
+    data: {
+      type: 'object',
+    },
+  },
+  example: {
+    name: 'ValidationError',
+    status: 422,
+    data: {
+      object: {
+        user_id: '1',
+      },
+      details: [
+        {
+          message: 'user_id length must be at least 5 characters long',
+          type: 'string.min',
+        },
+      ],
+    },
+  },
+};
+
+const definitions = {
+  ValidationError,
+};
+
 module.exports = {
   stringWithLimit,
   date,
+  definitions,
 };

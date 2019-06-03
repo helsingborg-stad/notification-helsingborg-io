@@ -1,4 +1,4 @@
-const { stringWithLimit, date } = require('../../validation/global.schema');
+const { stringWithLimit, date } = require('../../../swagger/global.swagger');
 
 const notificationsSchema = {
   Notification: {
@@ -34,20 +34,17 @@ const notificationsSchema = {
         ...stringWithLimit(10, 1000),
       },
     },
-  },
-  Error: {
-    type: 'object',
-    properties: {
-      id: {
-        type: 'integer',
-        format: 'int64',
-      },
-      name: {
-        type: 'string',
-      },
-    },
-    xml: {
-      name: 'Error',
+    example: {
+      id: 10,
+      user_id: 'john_snow',
+      service_id: 'iron_bank',
+      message: "Who's that blonde?",
+      pointer: null,
+      created_at: '2019-06-03T07:48:57.000Z',
+      acced_at: null,
+      mail_sent_at: null,
+      sms_sent_at: null,
+      digi_mail_sent_at: null,
     },
   },
 };
@@ -62,48 +59,52 @@ const notificationPath = {
       {
         in: 'body',
         name: 'body',
-        description: 'Notifications object that needs to be added to the store',
+        description: 'The notification to create.',
         required: true,
         schema: {
-          $ref: '#/definitions/Notification',
+          type: 'object',
+          properties: {
+            user_id: {
+              required: true,
+              ...stringWithLimit(5, 24),
+            },
+            service_id: {
+              type: 'string',
+              required: true,
+            },
+            pointer: {
+              ...stringWithLimit(0, 50),
+            },
+            message: {
+              ...stringWithLimit(10, 1000),
+              required: true,
+            },
+          },
+          example: {
+            user_id: 'john_snow',
+            service_id: 'iron_bank',
+            message: "Who's that blonde?",
+          },
         },
       },
     ],
-    requestBody: {
-      content: {
-        'application/json': {
-          schema: {
-            $ref: '#/definitions/Notification',
-          },
-        },
-      },
-      required: true,
-    },
     responses: {
       200: {
-        description: 'New notificaitons were created',
+        description: 'Notification created successfully.',
       },
-      400: {
-        description: 'Invalid parameters',
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/definitions/Error',
-            },
-            example: {
-              message: 'Notification identificationNumbers 10, 20 already exist',
-              internal_code: 'invalid_parameters',
-            },
-          },
+      422: {
+        description: 'Validation Error',
+        schema: {
+          $ref: '#/definitions/ValidationError',
         },
       },
     },
   },
   get: {
     tags: ['CRUD operations'],
-    summary: 'Find Notification by Service id and User id',
-    description: 'find Notification',
-    operationId: 'findNotification',
+    summary: 'Query notifications',
+    description: 'Query notifications by User id and Service id. Can optionally add a limit parameter to controll the number of returned entities. All entities are sorted in chronological order.',
+    operationId: 'queryNotifications',
     parameters: [
       {
         name: 'user_id',
@@ -116,8 +117,14 @@ const notificationPath = {
         name: 'service_id',
         in: 'query',
         description: 'The service id of the notification',
-        required: true,
         type: 'string',
+      },
+      {
+        name: 'limit',
+        in: 'query',
+        description: 'The number of entities to fetch',
+        type: 'integer',
+        default: 10,
       },
     ],
     responses: {
@@ -130,18 +137,10 @@ const notificationPath = {
           },
         },
       },
-      400: {
-        description: 'Invalid user_id value',
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/definitions/Error',
-            },
-            example: {
-              message: 'Notification with this user id doesn´t  exist',
-              internal_code: 'invalid_parameters',
-            },
-          },
+      422: {
+        description: 'Validation Error',
+        schema: {
+          $ref: '#/definitions/ValidationError',
         },
       },
     },

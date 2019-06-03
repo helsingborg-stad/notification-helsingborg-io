@@ -20,9 +20,9 @@ const routes = () => {
   router.post('/', Validator(postSchema, 'body', true), async (req, res) => {
     try {
       const { body } = req;
-      const result = await Notification.create(body);
+      await Notification.create(body);
 
-      return res.json(result);
+      return res.send('Notification created successfully.');
     } catch (err) {
       return res.status(err.status || 500).json(err);
     }

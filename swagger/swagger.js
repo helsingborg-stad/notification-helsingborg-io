@@ -1,4 +1,5 @@
 const { notificationPath, notificationsSchema } = require('../src/components/notification/notification.swagger');
+const { definitions } = require('../swagger/global.swagger');
 
 module.exports = {
   swagger: '2.0',
@@ -11,12 +12,11 @@ module.exports = {
   paths: {
     '/notification': {
       post: notificationPath.post,
-    },
-    '/notification/find': {
       get: notificationPath.get,
     },
   },
   definitions: {
+    ...definitions,
     ...notificationsSchema,
   },
 };
