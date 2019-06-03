@@ -1,3 +1,21 @@
+# Helsingborg Stad CircleCI Build config
+#
+# Supported Build process: Dockerized NodeJS Apps deployed on Heroku
+# 
+# -- REQUIRED ENVIROMENT VARIABLES -- 
+#
+# DOCKERHUB_LOGIN       Username on dockerhub [Found in confluence]
+# DOCKERHUB_PASSWORD    Password on dockerhub [Found in confluence]
+# 
+# HEROKU_API_KEY        General API code [Generated in Heroku admin]
+# HEROKU_APP_NAME       The name of the application in Heroku
+#
+# IMAGE_NAME            The name of the image on docker hub & circleci
+#
+# -- AUTHORS -- 
+#
+# Sebastian Thulin (sebastian.thulin@helsingborg.se)
+#
 version: 2.1
 executors:
   docker-publisher:
@@ -41,8 +59,8 @@ jobs:
           name: Deploy to Heroku
           command: |
             docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
-            docker tag $IMAGE_NAME registry.heroku.com/$HEROKU_APP_NAMESPACE/$HEROKU_APP_NAME/web
-            docker push registry.heroku.com/$HEROKU_APP_NAMESPACE/$HEROKU_APP_NAME/web
+            docker tag $IMAGE_NAME registry.heroku.com/$HEROKU_APP_NAME/web
+            docker push registry.heroku.com/$HEROKU_APP_NAME/web
   publish-tag:
     executor: docker-publisher
     steps:
