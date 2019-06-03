@@ -1,5 +1,4 @@
 const config = require('config');
-const Bookshelf = require('bookshelf');
 
 const MYSQL_HOST = config.get('MYSQL.HOST');
 const MYSQL_DB = config.get('MYSQL.DB');
@@ -9,7 +8,7 @@ const MYSQL_CONNECTION_LIMIT = config.get('MYSQL.CONNECTION_LIMIT');
 
 const Knex = require('knex');
 
-const knex = Knex({
+const client = Knex({
   client: 'mysql',
   connection: {
     host: MYSQL_HOST,
@@ -20,12 +19,19 @@ const knex = Knex({
   pool: { min: 0, max: Number(MYSQL_CONNECTION_LIMIT) },
 });
 
-const bookshelf = Bookshelf(knex);
+const extractQueryParts = (obj) => {
+  const where = obj;
+  const { limit } = obj;
 
-const model = tableName => bookshelf.Model.extend({ tableName });
+  delete where.limit;
+
+  return {
+    where,
+    limit,
+  };
+};
 
 module.exports = {
-  bookshelf,
-  knex,
-  model,
+  client,
+  extractQueryParts,
 };
