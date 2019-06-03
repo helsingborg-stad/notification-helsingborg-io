@@ -1,7 +1,13 @@
-# Helsingborg Stad CircleCI Build config
+# Helsingborg Stad CircleCI Build Config
 #
 # Supported Build process: Dockerized NodeJS Apps deployed on Heroku
-# 
+#
+# -- TESTS -- 
+#
+# This build config will make a basic warmup of the docker. It's up 
+# to the application itself to run the required tests to validate 
+# the functionality. This build will fail if any error message is thrown.
+#
 # -- REQUIRED ENVIROMENT VARIABLES -- 
 #
 # DOCKERHUB_LOGIN       Username on dockerhub [Found in confluence]
@@ -10,7 +16,7 @@
 # HEROKU_API_KEY        General API code [Generated in Heroku admin]
 # HEROKU_APP_NAME       The name of the application in Heroku
 #
-# IMAGE_NAME            The name of the image on docker hub & circleci
+# IMAGE_NAME            The name of the image on docker hub, circleci and github. 
 #
 # -- AUTHORS -- 
 #
@@ -61,6 +67,14 @@ jobs:
             docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
             docker tag $IMAGE_NAME registry.heroku.com/$HEROKU_APP_NAME/web
             docker push registry.heroku.com/$HEROKU_APP_NAME/web
+      - run:
+          name: Run Heroku release
+          command: |
+            curl -n -X PATCH https://api.heroku.com/apps/$HEROKU_APP_NAME/formation \
+            --data "{\"updates\": [{\"type\: \"web\",\"docker_image\":\"$IMAGE_NAME\"},{\"type\": \"worker\",\"docker_image\": \"$WORKER_DOCKER_IMAGE_ID\"}]}" \
+            --header "Content-Type: application/json" \
+            --header "Accept: application/vnd.heroku+json; version=3.docker-releases"
+            
   publish-tag:
     executor: docker-publisher
     steps:
