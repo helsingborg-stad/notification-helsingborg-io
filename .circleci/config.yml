@@ -46,16 +46,6 @@ jobs:
           root: .
           paths:
             - ./image.tar
-
-  runapp:
-    executor: heroku/default
-    steps:
-      - heroku/install
-      - run:
-        name: Trigger application on heroku
-        command: | 
-          heroku container:release web
-
   publish-latest:
     executor: docker-publisher
     steps:
@@ -79,7 +69,6 @@ jobs:
             docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
             docker tag $IMAGE_NAME registry.heroku.com/$HEROKU_APP_NAME/web
             docker push registry.heroku.com/$HEROKU_APP_NAME/web
-            
   publish-tag:
     executor: docker-publisher
     steps:
@@ -97,6 +86,14 @@ jobs:
             docker tag $IMAGE_NAME:latest $IMAGE_NAME:$IMAGE_TAG
             docker push $IMAGE_NAME:latest
             docker push $IMAGE_NAME:$IMAGE_TAG
+  runapp:
+    executor: heroku/default
+    steps:
+      - heroku/install
+      - run:
+        name: Trigger application on heroku
+        command: | 
+          heroku container:release web
 workflows:
   version: 2
   build-master:
