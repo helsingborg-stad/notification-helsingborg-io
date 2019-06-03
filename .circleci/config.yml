@@ -46,10 +46,16 @@ jobs:
           root: .
           paths:
             - ./image.tar
+
   runapp:
     executor: heroku/default
     steps:
       - heroku/install
+      - run:
+        name: Trigger application on heroku
+        command: | 
+        heroku container:release web
+
   publish-latest:
     executor: docker-publisher
     steps:
@@ -73,13 +79,6 @@ jobs:
             docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
             docker tag $IMAGE_NAME registry.heroku.com/$HEROKU_APP_NAME/web
             docker push registry.heroku.com/$HEROKU_APP_NAME/web
-      - run:
-          name: Run Heroku release
-          command: |
-            curl -n -X PATCH https://api.heroku.com/apps/$HEROKU_APP_NAME/formation \
-            --data "{\"updates\": [{\"type\: \"web\",\"docker_image\":\"$IMAGE_NAME\"},{\"type\": \"worker\",\"docker_image\": \"$WORKER_DOCKER_IMAGE_ID\"}]}" \
-            --header "Content-Type: application/json" \
-            --header "Accept: application/vnd.heroku+json; version=3.docker-releases"
             
   publish-tag:
     executor: docker-publisher
@@ -106,15 +105,15 @@ workflows:
           filters:
             branches:
               only: feature/deploy
-      - runapp:
+      - publish-latest:
           requires:
             - build
           filters:
             branches:
               only: feature/deploy
-      - publish-latest:
+      - runapp:
           requires:
-            - build
+            - publish-latest
           filters:
             branches:
               only: feature/deploy
