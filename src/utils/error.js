@@ -42,6 +42,44 @@ class ValidationError extends DomainError {
   }
 }
 
+class WsdlCallError extends DomainError {
+  constructor(msg, original) {
+    super(msg, 400);
+    this.data = {
+      // eslint-disable-next-line no-underscore-dangle
+      object: original._object,
+
+      // fetch only message and type from each error
+      details: original.details.map(({ message, type }) => ({
+        message: message.replace(/['"]/g, ''),
+        type,
+      })),
+    };
+  }
+}
+
+class WsdlConnectionError extends DomainError {
+  constructor(msg, original) {
+    super(msg, 503);
+    this.data = {
+      // eslint-disable-next-line no-underscore-dangle
+      object: original._object,
+
+      // fetch only message and type from each error
+      details: original.details.map(({ message, type }) => ({
+        message: message.replace(/['"]/g, ''),
+        type,
+      })),
+    };
+  }
+}
+
+class WsdlDataError extends DomainError {
+  constructor(msg) {
+    super(msg, 404);
+  }
+}
+
 class WeakValidationError extends DomainError {
   constructor(msg) {
     super(msg, 422);
@@ -52,4 +90,7 @@ module.exports = {
   InternalServerError,
   ValidationError,
   WeakValidationError,
+  WsdlCallError,
+  WsdlConnectionError,
+  WsdlDataError,
 };

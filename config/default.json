@@ -12,5 +12,11 @@
     "CONNECTION_LIMIT": 10,
     "USER": "notifications_user",
     "PASSWORD": "notifications_pw"
+  },
+  "WSDL": {
+    "URI": "./soap/.wsdl",
+    "HOST": "env_placeholder",
+    "CERT": "env_placeholder",
+    "KEY": "env_placeholder"
   }
 }
