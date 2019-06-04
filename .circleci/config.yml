@@ -31,6 +31,7 @@ executors:
       - image: circleci/buildpack-deps:stretch
 jobs:
   build:
+    executor: machine
     steps:
       - checkout
       - run:
