@@ -90,10 +90,6 @@ jobs:
     executor: heroku/default
     steps:
       - run:
-          name: Installing heroku pack
-          command: | 
-            heroku/install
-      - run:
           name: Trigger application on heroku
           command: |
             "heroku container:release web --app $HEROKU_APP_NAME"
