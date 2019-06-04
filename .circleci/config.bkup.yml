@@ -64,7 +64,7 @@ jobs:
             docker push $IMAGE_NAME:latest
             docker push $IMAGE_NAME:$IMAGE_TAG
       - run:
-          name: Deploy to Heroku
+          name: Deploy to Heroku registry
           command: |
             docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
             docker tag $IMAGE_NAME registry.heroku.com/$HEROKU_APP_NAME/web

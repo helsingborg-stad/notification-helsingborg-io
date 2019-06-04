@@ -25,11 +25,13 @@
 version: 2.1
 orbs:
   heroku: circleci/heroku@0.0.8
-machine:
-    image: ubuntu-1604:201903-01
+executors:
+  machine:
+    docker:
+      - image: circleci/buildpack-deps:stretch
 jobs:
+  executor: machine
   build:
-    executor: machine
     steps:
       - checkout
       - run:
