@@ -92,8 +92,8 @@ jobs:
       - heroku/install
       - run:
         name: Trigger application on heroku
-        command: | 
-          heroku container\:release web
+        command: |
+          heroku container:release web --app $HEROKU_APP_NAME
 workflows:
   version: 2
   build-master:
