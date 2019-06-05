@@ -1,0 +1,48 @@
+# Helsingborg Stad CircleCI Build Config
+#
+# Supported Build process: Dockerized NodeJS Apps deployed on Heroku
+#
+# -- TESTS -- 
+#
+# This build config will make a basic warmup of the docker. It's up 
+# to the application itself to run the required tests to validate 
+# the functionality. This build will fail if any error message is thrown.
+#
+# -- REQUIRED ENVIROMENT VARIABLES -- 
+#
+# DOCKERHUB_LOGIN       Username on dockerhub [Found in confluence]
+# DOCKERHUB_PASSWORD    Password on dockerhub [Found in confluence]
+# 
+# HEROKU_API_KEY        General API code [Generated in Heroku admin]
+# HEROKU_APP_NAME       The name of the application in Heroku
+#
+# IMAGE_NAME            The name of the image on docker hub, circleci and github. 
+#
+# -- AUTHORS -- 
+#
+# Sebastian Thulin (sebastian.thulin@helsingborg.se)
+#
+version: 2.1
+orbs:
+  heroku: circleci/heroku@0.0.8
+executors:
+  machine:
+    docker:
+      - image: circleci/buildpack-deps:stretch
+jobs:
+  executor: machine
+  build:
+    steps:
+      - checkout
+      - run:
+          name: Login to Heroku
+          command: |
+            "heroku container:login"
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: feature/deploy
