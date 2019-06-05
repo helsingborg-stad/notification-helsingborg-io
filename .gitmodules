@@ -1,3 +1,0 @@
-[submodule ".circleci"]
-	path = .circleci
-	url = git@github.com:helsingborg-stad/configuration-circleci-nodejs.git
