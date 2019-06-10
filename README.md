@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/helsingborg-stad/labs-api-notification.svg?style=svg)](https://circleci.com/gh/helsingborg-stad/labs-api-notification)
+
 # labs-api-notification
 API for storing and exposing notifications; pushed by services, for users.
 
