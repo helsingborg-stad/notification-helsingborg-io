@@ -3,7 +3,7 @@
     "LEVEL": "trace"
   },
   "SERVER": {
-    "PORT": 3000
+    "PORT": "SERVER_PORT"
   },
   "MYSQL": {
     "HOST": "127.0.0.1",
