@@ -12,7 +12,7 @@ const app = express();
 /**
  * Config
  */
-const SERVER_PORT = config.get('SERVER.PORT');
+const SERVER_PORT = process.env.PORT || config.get('SERVER.PORT');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
