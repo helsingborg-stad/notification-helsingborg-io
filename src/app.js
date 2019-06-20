@@ -33,7 +33,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Listen on port specfied in env-file.
 const server = app.listen(SERVER_PORT,
-  () => logger.info(`Example app listening on port ${SERVER_PORT}!`));
+  () => logger.info(`Notification app listening on port ${SERVER_PORT}!`));
 
 // Export server to use it in tests.
 module.exports = server;
