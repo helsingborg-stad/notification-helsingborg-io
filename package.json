@@ -38,7 +38,7 @@
     "mysql": "^2.17.1",
     "newrelic": "^5.11.0",
     "pino": "^5.12.5",
-    "redis": "^2.8.0",
+    "redis": "^3.1.1",
     "soap": "^0.27.1",
     "swagger-ui-express": "^4.0.2"
   }
